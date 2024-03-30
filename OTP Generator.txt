@@ -1,3 +1,11 @@
+DynamoDB Table:
+-----------------
+Table Name: otp_holder
+Primary Key: email_id 
+Sort Key: EXPIRATION_TIME
+
+
+
 OTP Generator:
 ------------------
 import json
@@ -52,10 +60,9 @@ def lambda_handler(event, context):
              
         message = {"Subject": {"Data": 'Your OTP (valid for only 2 mins)!'}, "Body": {"Html": {"Data": body}}}
         
-        response = client.send_email(Source = 'shamithakoduru@gmail.com', Destination = {"ToAddresses": [mail_id]}, Message = message) 
+        response = client.send_email(Source = '{FromAddress}', Destination = {"ToAddresses": [mail_id]}, Message = message) 
         
         print("The mail is sent successfully")
-
 		
 Verify OTP:
 --------------
